@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kết quả phân tích</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    color:#172033;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 15% 10%,#dbeafe,transparent 30%),
+        radial-gradient(circle at 85% 20%,#ede9fe,transparent 30%),
+        linear-gradient(135deg,#f8fbff,#f7f5ff);
+}
+
+header{
+    height:72px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(255,255,255,.85);
+    border-bottom:1px solid #e2e8f0;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+    color:#172554;
+}
+
+.status{
+    padding:8px 14px;
+    border-radius:20px;
+    background:#dcfce7;
+    color:#15803d;
+    font-size:13px;
+}
+
+.container{
+    width:900px;
+    max-width:92%;
+    margin:45px auto;
+}
+
+.steps{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-bottom:40px;
+    flex-wrap:wrap;
+}
+
+.step{
+    padding:9px 14px;
+    border-radius:20px;
+    background:white;
+    border:1px solid #e2e8f0;
+    color:#64748b;
+    font-size:13px;
+}
+
+.done{
+    background:#f0fdf4;
+    color:#15803d;
+}
+
+.active{
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+    color:white;
+}
+
+h1,h2,h3{
+    color:#172554;
+}
+
+.subtitle{
+    color:#64748b;
+    line-height:1.6;
+}
+
+.framework{
+    margin:25px 0;
+    padding:24px;
+    border-radius:18px;
+    background:linear-gradient(135deg,#eff6ff,#f5f3ff);
+    border:1px solid #c7d2fe;
+}
+
+.framework small{
+    color:#64748b;
+    font-weight:bold;
+}
+
+.framework h2{
+    margin:8px 0 0;
+    color:#6d28d9;
+    font-size:28px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    padding:25px;
+    background:white;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(51,65,85,.08);
+}
+
+.item{
+    padding:12px 0;
+    border-bottom:1px solid #f1f5f9;
+    line-height:1.5;
+}
+
+.ok{color:#15803d}
+.warning{color:#dc2626}
+.note{color:#d97706}
+
+.deploy{
+    margin-top:22px;
+    padding:28px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(51,65,85,.08);
+}
+
+.tag{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:20px;
+    background:#f3e8ff;
+    color:#6d28d9;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.platform{
+    font-size:26px;
+    font-weight:bold;
+    margin:15px 0 8px;
+    color:#172554;
+}
+
+.deploy p{
+    color:#64748b;
+    line-height:1.6;
+}
+
+.guide{
+    margin-top:22px;
+    padding:28px;
+    background:white;
+    border-radius:20px;
+}
+
+.guide-item{
+    padding:12px 0;
+    border-bottom:1px solid #f1f5f9;
+}
+
+.finish{
+    margin-top:22px;
+    padding:28px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#fff,#f5f3ff);
+    border:1px solid #ddd6fe;
+}
+
+.url-box{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.url-box input{
+    flex:1;
+    padding:14px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-size:15px;
+}
+
+button{
+    padding:14px 20px;
+    border:0;
+    border-radius:10px;
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.complete{
+    display:none;
+    margin-top:22px;
+    padding:25px;
+    text-align:center;
+    border-radius:15px;
+    background:linear-gradient(135deg,#ecfdf5,#eff6ff);
+}
+
+.complete h2{
+    color:#15803d;
+}
+
+.complete a{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.back{
+    display:inline-block;
+    margin:25px 0;
+    color:#64748b;
+    text-decoration:none;
+}
+
+@media(max-width:700px){
+    .grid{grid-template-columns:1fr}
+    .url-box{flex-direction:column}
+    header{padding:0 20px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🐍 Python Deploy Assistant</div>
+    <div class="status">✓ Phân tích hoàn tất</div>
+</header>
+
+<div class="container">
+
+    <div class="steps">
+        <div class="step done">✓ Upload</div>
+        <div class="step active">2. Phân tích</div>
+        <div class="step">3. Chuẩn bị</div>
+        <div class="step">4. Deploy</div>
+        <div class="step">5. Hoàn thành</div>
+    </div>
+
+    <h1>✨ Kết quả phân tích</h1>
+
+    <p class="subtitle">
+        Chương trình đã kiểm tra project và các thành phần
+        cần thiết trước khi deploy.
+    </p>
+
+    <div class="framework">
+        <small>PROJECT ĐƯỢC NHẬN DIỆN LÀ</small>
+        <h2>{{ framework }}</h2>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>📦 Cấu trúc project</h3>
+
+            {% if requirements %}
+                <div class="item ok">
+                    ✓ Có requirements.txt
+                </div>
+            {% else %}
+                <div class="item warning">
+                    ✕ Thiếu requirements.txt
+                </div>
+            {% endif %}
+
+            {% if env %}
+                <div class="item ok">
+                    ✓ Có file .env
+                </div>
+            {% else %}
+                <div class="item note">
+                    ⚠ Không tìm thấy file .env
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            <h3>🔐 Kiểm tra bảo mật</h3>
+
+            {% if api_key %}
+                <div class="item warning">
+                    ⚠ Phát hiện nguy cơ API Key hard-code
+                </div>
+
+                <div class="item">
+                    Nên chuyển API Key sang file .env.
+                </div>
+            {% else %}
+                <div class="item ok">
+                    ✓ Chưa phát hiện API Key hard-code
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="deploy">
+
+        <span class="tag">★ KHUYÊN DÙNG</span>
+
+        {% if framework == "Streamlit" %}
+
+            <div class="platform">
+                Streamlit Community Cloud
+            </div>
+
+            <p>
+                Phù hợp với ứng dụng Streamlit và dễ sử dụng
+                cho người mới.
+            </p>
+
+        {% elif framework == "Flask" %}
+
+            <div class="platform">
+                Render
+            </div>
+
+            <p>
+                Phù hợp để đưa ứng dụng Flask lên Internet.
+            </p>
+
+        {% elif framework == "FastAPI" %}
+
+            <div class="platform">
+                Render
+            </div>
+
+            <p>
+                Có thể sử dụng Render để triển khai FastAPI.
+            </p>
+
+        {% elif framework == "Gradio" %}
+
+            <div class="platform">
+                Hugging Face Spaces
+            </div>
+
+            <p>
+                Phù hợp với ứng dụng AI sử dụng Gradio.
+            </p>
+
+        {% else %}
+
+            <div class="platform">
+                Chưa sẵn sàng deploy
+            </div>
+
+            <p>
+                Project chưa được nhận diện là ứng dụng web.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    <div class="guide">
+
+        <h2>🚀 Các bước deploy</h2>
+
+        <div class="guide-item">
+            <b>Bước 1:</b>
+            Kiểm tra requirements.txt và API Key.
+        </div>
+
+        <div class="guide-item">
+            <b>Bước 2:</b>
+            Đưa project lên GitHub.
+        </div>
+
+        <div class="guide-item">
+            <b>Bước 3:</b>
+            Kết nối GitHub với nền tảng deploy.
+        </div>
+
+        <div class="guide-item">
+            <b>Bước 4:</b>
+            Cấu hình API Key bằng Secrets nếu project cần.
+        </div>
+
+        <div class="guide-item">
+            <b>Bước 5:</b>
+            Deploy và lấy URL public.
+        </div>
+
+    </div>
+
+    <div class="finish">
+
+        <span class="tag">🎯 BƯỚC CUỐI</span>
+
+        <h2>Nhập URL ứng dụng</h2>
+
+        <p class="subtitle">
+            Sau khi deploy xong, nhập URL public của app
+            vào bên dưới.
+        </p>
+
+        <div class="url-box">
+
+            <input
+                type="url"
+                id="publicUrl"
+                placeholder="https://ten-app-cua-ban..."
+            >
+
+            <button onclick="finishDeploy()">
+                Xác nhận →
+            </button>
+
+        </div>
+
+        <div id="complete" class="complete">
+
+            <div style="font-size:45px">
+                🎉
+            </div>
+
+            <h2>
+                App của bạn đã online!
+            </h2>
+
+            <p>
+                URL public:
+            </p>
+
+            <a
+                id="appLink"
+                href="#"
+                target="_blank">
+            </a>
+
+        </div>
+
+    </div>
+
+    <a href="/" class="back">
+        ← Phân tích project khác
+    </a>
+
+</div>
+
+
+<script>
+
+function finishDeploy(){
+
+    let url =
+        document.getElementById("publicUrl").value.trim();
+
+    if(url === ""){
+        alert("Bạn chưa nhập URL!");
+        return;
+    }
+
+    if(!url.startsWith("https://")){
+        alert("URL phải bắt đầu bằng https://");
+        return;
+    }
+
+    let complete =
+        document.getElementById("complete");
+
+    let link =
+        document.getElementById("appLink");
+
+    link.innerText = url;
+    link.href = url;
+
+    complete.style.display = "block";
+
+    complete.scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>

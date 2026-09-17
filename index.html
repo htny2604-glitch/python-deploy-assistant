@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Python Deploy Assistant</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+            color: #172033;
+
+            background:
+                radial-gradient(circle at 15% 10%, #dbeafe 0, transparent 30%),
+                radial-gradient(circle at 85% 20%, #ede9fe 0, transparent 30%),
+                linear-gradient(135deg, #f8fbff, #f7f5ff);
+        }
+
+
+        /* HEADER */
+
+        header {
+            height: 72px;
+
+            background: rgba(255,255,255,0.85);
+
+            border-bottom: 1px solid #e2e8f0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            color: #172554;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+        }
+
+        .badge {
+            padding: 8px 15px;
+
+            border-radius: 30px;
+
+            color: #5b21b6;
+            background: #f3e8ff;
+
+            font-size: 13px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+
+            padding: 65px 20px 30px;
+        }
+
+        .small-title {
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            border-radius: 30px;
+
+            color: #5b21b6;
+            background: #f3e8ff;
+
+            font-size: 13px;
+        }
+
+        h1 {
+            margin: 18px 0;
+
+            font-size: 52px;
+
+            line-height: 1.1;
+
+            color: #172554;
+        }
+
+        h1 span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed,
+                    #0891b2
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+        .description {
+            max-width: 650px;
+
+            margin: 20px auto;
+
+            color: #64748b;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+        }
+
+
+        /* STEPS */
+
+        .steps {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 9px;
+
+            margin: 32px auto;
+        }
+
+        .step {
+            padding: 9px 15px;
+
+            border-radius: 30px;
+
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        .step.active {
+            color: white;
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+        }
+
+        .line {
+            width: 25px;
+
+            height: 1px;
+
+            background: #cbd5e1;
+        }
+
+
+        /* UPLOAD CARD */
+
+        .upload-card {
+            width: 720px;
+
+            max-width: 90%;
+
+            margin: 5px auto 70px;
+
+            padding: 35px;
+
+            background:
+                rgba(255,255,255,0.92);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 25px 60px
+                rgba(51,65,85,0.12);
+        }
+
+        .upload-card h2 {
+            margin-top: 0;
+
+            color: #172554;
+        }
+
+        .upload-card > p {
+            color: #64748b;
+
+            line-height: 1.6;
+        }
+
+
+        /* DROP AREA */
+
+        .drop-area {
+            margin-top: 25px;
+
+            padding: 40px 20px;
+
+            text-align: center;
+
+            border:
+                2px dashed #a5b4fc;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8faff,
+                    #faf5ff
+                );
+        }
+
+        .drop-area:hover {
+            border-color: #7c3aed;
+        }
+
+        .upload-icon {
+            width: 62px;
+
+            height: 62px;
+
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 17px;
+
+            color: white;
+
+            font-size: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3b82f6,
+                    #8b5cf6
+                );
+        }
+
+        .drop-area h3 {
+            color: #172554;
+
+            margin-bottom: 5px;
+        }
+
+        .drop-area p {
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* FILE TYPES */
+
+        .file-types {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin: 18px 0;
+        }
+
+        .file-type {
+            padding: 6px 9px;
+
+            border-radius: 7px;
+
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            margin: 12px 0;
+
+            max-width: 100%;
+        }
+
+
+        /* BUTTON */
+
+        button {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+
+        .note {
+            margin-top: 20px;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            background: #f8fafc;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        @media(max-width: 700px) {
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .steps {
+                flex-wrap: wrap;
+            }
+
+            .line {
+                display: none;
+            }
+
+            .badge {
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            🐍
+        </div>
+
+        Python Deploy Assistant
+
+    </div>
+
+
+    <div class="badge">
+        Dành cho người mới
+    </div>
+
+</header>
+
+
+
+<section class="hero">
+
+    <div class="small-title">
+        🚀 Deploy Python dễ dàng hơn
+    </div>
+
+
+    <h1>
+
+        Đưa app Python của bạn
+
+        <br>
+
+        <span>
+            lên Internet
+        </span>
+
+    </h1>
+
+
+    <p class="description">
+
+        Upload project Python của bạn.
+
+        Chương trình sẽ kiểm tra cấu trúc,
+        bảo mật và gợi ý cách deploy phù hợp.
+
+    </p>
+
+
+
+    <div class="steps">
+
+        <div class="step active">
+            1. Upload
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step">
+            2. Phân tích
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step">
+            3. Chuẩn bị
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step">
+            4. Deploy
+        </div>
+
+        <div class="line"></div>
+
+        <div class="step">
+            5. Hoàn thành
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<div class="upload-card">
+
+
+    <h2>
+        Chọn project Python
+    </h2>
+
+
+    <p>
+
+        Upload project dưới dạng ZIP
+        hoặc chọn nhiều file trong project
+        cùng lúc.
+
+    </p>
+
+
+
+    <form
+        action="/upload"
+        method="POST"
+        enctype="multipart/form-data"
+    >
+
+
+        <div class="drop-area">
+
+
+            <div class="upload-icon">
+                ↑
+            </div>
+
+
+            <h3>
+                Upload project của bạn
+            </h3>
+
+
+            <p>
+                Chọn ZIP hoặc nhiều file từ máy tính
+            </p>
+
+
+
+            <div class="file-types">
+
+                <div class="file-type">.ZIP</div>
+
+                <div class="file-type">.PY</div>
+
+                <div class="file-type">.TXT</div>
+
+                <div class="file-type">.ENV</div>
+
+                <div class="file-type">.JSON</div>
+
+                <div class="file-type">.TOML</div>
+
+                <div class="file-type">.YAML</div>
+
+            </div>
+
+
+
+            <input
+                type="file"
+                name="project"
+                multiple
+                required
+            >
+
+
+            <p>
+                Giữ Ctrl để chọn nhiều file
+            </p>
+
+
+        </div>
+
+
+
+        <button type="submit">
+
+            Phân tích project →
+
+        </button>
+
+
+    </form>
+
+
+
+    <div class="note">
+
+        🔒 Project chỉ được sử dụng để phân tích.
+        Chương trình không tự chạy code
+        bên trong project.
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
